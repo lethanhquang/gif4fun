@@ -4,6 +4,7 @@ require [
   "angular-ui-router"
   "angular-animate"
   "angular-aria"
+  "angular-material"
   "loader/loader"
 ], (angular, Hammer) ->
   "use strict"
