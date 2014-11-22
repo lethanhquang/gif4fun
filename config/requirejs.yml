@@ -1,0 +1,56 @@
+modules:
+  - name: 'application'
+paths:
+  'angular': 'angular/angular'
+    # require angular mocks for testing
+  'angular-mocks': 'angular-mocks/angular-mocks'
+  # require restangular for easily handling sending and receiving request
+  'restangular': 'restangular/dist/restangular'
+  # require angular for better handling and binding controller
+  'angular-ui-router': 'angular-ui-router/release/angular-ui-router'
+  # require angular animate
+  'angular-animate': 'angular-animate/angular-animate'
+  # require angular aria
+  'angular-aria': 'angular-aria/angular-aria'
+  # require angular material
+  'angular-material': 'angular-material/angular-material'
+  'hammerjs': 'hammer.js/hammer'
+  # require angular-deckgrid
+  'angular-deckgrid': 'angular-deckgrid/angular-deckgrid'
+  # require jquery
+  'jquery': 'jquery'
+  'jquery_ujs': 'jquery_ujs'
+  # require lodash
+  'lodash': 'lodash/dist/lodash'
+  # require bootstrap.js to make bootstrap components work
+  'bootstrap': 'bootstrap-sprockets'
+  # jasmine boostrap
+  'jasmine': 'jasmine'
+  'jasmine-html': 'jasmine-html'
+  'jasmine-specs': 'jasmine-specs'
+  'json2': 'json2'
+  'boot': 'boot'
+shim:
+  'jquery_ujs': ['jquery']
+  'lodash':
+    exports: '_'
+  'angular':
+    exports: 'angular'
+    deps: ['jquery']
+  'angular-mocks': ['angular']
+  'restangular': ['angular']
+  'angular-ui-router': ['angular']
+  'angular-animate': ['angular']
+  'angular-aria': ['angular']
+  'angular-material': ['angular', 'hammerjs']
+  'angular-deckgrid': ['angular']
+  'bootstrap': ['jquery']
+  'jasmine':
+    exports: 'window.jasmineRequire'
+  'jasmine-html':
+    deps: ['jasmine']
+    exports: 'window.jasmineRequire'
+  'jasmine-specs': ['boot']
+  'boot':
+    deps: ['jasmine', 'jasmine-html']
+    exports: 'window.jasmineRequire'

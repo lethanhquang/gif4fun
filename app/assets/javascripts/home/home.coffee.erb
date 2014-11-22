@@ -1,0 +1,44 @@
+define [
+  "angular"
+  "lodash"
+  "angular-ui-router"
+  "angular-deckgrid"
+  "layouts/main"
+], (angular, _) ->
+
+  #config path for home page
+  angular.module "home", ["ui.router", "main", "akoenig.deckgrid"]
+  .config [
+    "$stateProvider"
+    ($stateProvider) ->
+      $stateProvider
+        .state "main.home",
+          url: "/"
+          views:
+            "content@main":
+              templateUrl: "<%= asset_path("home/home.tpl.html") %>"
+              controller: "HomeController"
+  ]
+  .controller "HomeController", [
+    "$scope"
+    "$state"
+    ($scope, $state)->
+      # initialize
+      $scope.state     = $state
+      $scope.common.pageTitle = "Home"
+
+      # init photos
+      photos = []
+      
+      _.times(_.random(20, 50), (i)->
+        x = 400 + _.random(1, 100)
+        y = 300 + _.random(1, 100)
+        
+        photos.push(
+          {id: i, 'title': "Card number #{i}", src: "http://lorempixel.com/#{x}/#{y}/"}
+        )
+      )
+
+      $scope.photos = photos
+
+  ]
