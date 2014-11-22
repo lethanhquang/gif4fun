@@ -77,3 +77,5 @@ gem 'slim'
 # grape api
 gem 'grape-entity'
 gem 'grape'
+
+gem 'rails_12factor', group: :production
