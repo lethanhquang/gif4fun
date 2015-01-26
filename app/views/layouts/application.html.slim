@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title Gif4Fun! | Just for fun
+    link rel="icon" type="image/png" href="#{asset_path('favicon.png')}"
+    meta content="IE=edge" http-equiv="X-UA-Compatible"
+    meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport"
+    = stylesheet_link_tag    'application', media: 'all'
+    = stylesheet_link_tag    'http://fonts.googleapis.com/css?family=Roboto:400,700,600,300', media: 'all'
+    = requirejs_include_tag  'application'
+    = csrf_meta_tags
+  body
+    .animsition-loading
+    = yield

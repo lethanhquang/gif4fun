@@ -1,0 +1,19 @@
+# A sample Bowerfile
+# Check out https://github.com/42dev/bower-rails#ruby-dsl-configuration for more options
+
+# asset 'bootstrap'# auto generate bower assets
+
+asset 'director'
+asset 'immutable', '3.4.1'
+asset 'lodash', '2.4.1'
+asset 'superagent', '0.21.0'
+asset 'jquery', '2.1.1'
+asset 'react', '0.12.1'
+asset 'react-bootstrap', '0.13.0'
+asset 'react-router', '0.11.5'
+asset 'react-rater', '0.1.0'
+asset 'alertify', '0.3.10'
+asset 'flux', '2.0.2'
+asset 'eventemitter2', '0.4.14'
+asset 'es6-promise'
+asset 'eventemitter2'
