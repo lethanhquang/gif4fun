@@ -29,9 +29,15 @@ gem 'requirejs-rails'
 # grape API
 gem 'grape'
 
+# authentication
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+
 # helper gem
 gem 'will_paginate', '~> 3.0.6'
 gem 'slim-rails'
 gem 'simple_form'
 gem 'nested_form'
 
+gem 'dotenv-rails', :groups => [:development, :test]

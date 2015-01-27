@@ -46,10 +46,6 @@ define [
         <div className="panel-heading">Top Stories</div>
         <div className="panel-body" id="top-stories">
           {posts}
-
-          <p>"Mobile first" and "unobtrusive JavaScript" (AKA: "progressive enhancement") are strategies for when a new site design is being considered. These are related concepts that predated RWD: browsers of basic mobile phones do not understand JavaScript or media queries, so the recommended practice is to create a basic web site then enhance it for smart phones and PCs—rather than try "graceful degradation" to make a complex, image-heavy site work on the most basic mobile phones.</p>
-          <p>Media Queries is a CSS3 module allowing content rendering to adapt to conditions such as screen resolution (e.g. smartphone vs. high definition screen). It became a W3C recommended standard in June 2012.[1] and is a cornerstone technology of Responsive Web Design.</p>
-          <hr />
           <div className="well text-center">
             <h1>Centered Text</h1>
             This was a 2.x challenge that seems a little easier in 3.

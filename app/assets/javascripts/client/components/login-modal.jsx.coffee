@@ -28,7 +28,9 @@ define [
             <p><strong>Please sign into your account.</strong></p>
           </div>
           <div className="login-container">
-            <button className="facebook-signin">Sign in with Facebook</button>
+            <a href="/users/auth/facebook">
+              <button className="facebook-signin">Sign in with Facebook</button>
+            </a>
             <p><strong>or</strong></p>
             <form>
               <div className="form-group">

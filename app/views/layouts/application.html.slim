@@ -7,8 +7,12 @@ html
     meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport"
     = stylesheet_link_tag    'application', media: 'all'
     = stylesheet_link_tag    'http://fonts.googleapis.com/css?family=Roboto:400,700,600,300', media: 'all'
+    = javascript_include_tag 'constants'
     = requirejs_include_tag  'application'
     = csrf_meta_tags
   body
     .animsition-loading
     = yield
+
+    javascript:
+      window.INFOS  = #{current_user.to_json(only: [:id, :email, :name, :phone, :country_code, :authentication_token, :sms_confirmed_at], methods: :avatar_square).html_safe};
