@@ -49,6 +49,10 @@ GEM
       sass (~> 3.2)
     bower-rails (0.8.2)
     builder (3.2.2)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.4)
+      climate_control (>= 0.0.3, < 1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.0.1)
@@ -72,6 +76,8 @@ GEM
     dotenv (1.0.2)
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
+    enumerize (0.8.0)
+      activesupport (>= 3.2)
     equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.2.1)
@@ -89,6 +95,14 @@ GEM
       rack-accept
       rack-mount
       virtus (>= 1.0.0)
+    grape-apiary (0.0.4)
+      grape (~> 0.6)
+    grape-entity (0.4.4)
+      activesupport
+      multi_json (>= 1.3.2)
+    grape-swagger (0.8.0)
+      grape
+      grape-entity
     hashie (3.2.0)
     hike (1.2.3)
     i18n (0.7.0)
@@ -127,6 +141,11 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    paperclip (4.2.0)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     pg (0.17.1)
     rack (1.5.2)
     rack-accept (0.4.5)
@@ -228,14 +247,18 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   dotenv-rails
+  enumerize
   font-awesome-rails
   grape
+  grape-apiary
+  grape-swagger
   jbuilder (~> 2.0)
   jquery-rails
   modernizr-rails (~> 2.7.1)
   nested_form
   omniauth
   omniauth-facebook
+  paperclip (~> 4.2)
   pg
   rails (= 4.1.8)
   react-rails (~> 1.0.0.pre)!

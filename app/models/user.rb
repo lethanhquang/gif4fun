@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  include ExtActiveRecord
+  include Devise::Controllers::UrlHelpers
+
+  before_save :ensure_authentication_token
+
   TEMP_EMAIL_PREFIX = 'system@gif4fun.me'
   TEMP_EMAIL_REGEX = /\Asystem@gif4fun.me/
 
@@ -8,6 +13,33 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+
+  has_attached_file :avatar,
+    styles: {
+      thumb:   '200x200#',
+      medium:  '400>x',
+      large:   '800>x',
+      square:  '400x400#'
+    },
+    default_url: '/assets/placeholder.png',
+    convert_options: {
+      thumb: '-quality 90',
+      medium: '-quality 90',
+      large: '-quality 90',
+      square: '-quality 90'
+    }
+
+  validates_attachment :avatar,
+                        content_type: { content_type: ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'] },
+                        size: { less_than: 3.megabyte }
+
+  def as_api_response
+    as_json methods: :avatar_square
+  end
+
+  def avatar_square
+    avatar.url :thumb
+  end
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
@@ -43,12 +75,34 @@ class User < ActiveRecord::Base
       end
     end
 
+    def self.find_for_database_authentication(params)
+      where(params).first
+    end
+
+
     # Associate the identity with the user if needed
     if identity.user != user
       identity.user = user
       identity.save!
     end
     user
+  end
+
+  def self.authorize(params)
+    return find_by authentication_token: params[:access_token] if params[:access_token]
+
+    user = find_for_database_authentication(params.slice(*authentication_keys))
+
+    return unless user && user.valid_password?(params[:password])
+
+    user
+  end
+
+  def self.authorize!(params)
+    user = authorize(params)
+    return user if user
+
+    fail 'Invalid email or password.', authentication_keys: authentication_keys.join(', ')
   end
 
   def email_verified?
@@ -61,6 +115,17 @@ class User < ActiveRecord::Base
 
   def confirmation_required?
     false
+  end
+
+  def ensure_authentication_token
+    self.authentication_token ||= generate_authentication_token
+  end
+
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless self.class.exists? authentication_token: token
+    end
   end
 
 end

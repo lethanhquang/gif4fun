@@ -28,11 +28,17 @@ gem 'requirejs-rails'
 
 # grape API
 gem 'grape'
+gem 'grape-apiary'
+gem 'grape-swagger'
 
 # authentication
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
+
+# common
+gem 'paperclip', '~> 4.2'
+gem 'enumerize'
 
 # helper gem
 gem 'will_paginate', '~> 3.0.6'

@@ -7,7 +7,9 @@ define [
   'client/components/layout/layout-footer'
   'client/components/left-panel'
   'client/components/home-page'
-], (MainPage, LayoutNavbar, LayoutHeader, LayoutFooter, LeftPanel, HomePage) ->
+  'client/components/new-post'
+  'client/components/new-post/new-post-tabs'
+], (MainPage, LayoutNavbar, LayoutHeader, LayoutFooter, LeftPanel, HomePage, NewPost, NewPostTabs) ->
 
   {
     MainPage,
@@ -15,6 +17,8 @@ define [
     LayoutHeader,
     LayoutFooter,
     LeftPanel,
-    HomePage
+    HomePage,
+    NewPost,
+    NewPostTabs
   }
 
