@@ -17,6 +17,7 @@ define [
     displayName: 'NewPostTabs'
 
     mixins: [UserStore.Mixins]
+
     render: ->
       return `<span />` unless @state.user
 

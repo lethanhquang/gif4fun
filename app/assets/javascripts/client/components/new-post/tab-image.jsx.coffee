@@ -2,13 +2,14 @@
 
 define [
   'react'
-  'react-router'
   'react-bootstrap'
+  'alertify'
+  'client/constants/app-constants'
   'client/actions/app-actions'
   'client/stores/user-store'
-  'client/components/new-post/form/input-title'
-  'client/components/new-post/form/input-tags'
-], (React, Router, ReactBootstrap, AppActions, UserStore, InputTitle, InputTags) ->
+  'client/stores/post-store'
+  'client/web-api/post-api'
+], (React, ReactBootstrap, alertify, AppConstants, AppActions, UserStore, PostStore, PostApi) ->
 
   # @author Quang Râu
   #
@@ -20,23 +21,60 @@ define [
     getInitialState: ->
       user = UserStore.getUser()
 
-      title:     'Title of post'
-      username:  user.get 'name'
+      post_type:       AppConstants.POST.POST_TYPE_DEFAULT
+      title:           undefined
+      content:         undefined
+      tag:             undefined
+      image:           undefined
+      imageThumbnail:  AppConstants.IMAGES.PLACE_HOLDER
+      username:        user.get 'name'
+
+    imageOnChange: (event) ->
+      file = event.target.files[0]
+
+      if file
+        reader        = new FileReader()
+        reader.onload = (loadEvent) => @setState image: file, imageThumbnail: loadEvent.target.result
+        reader.readAsDataURL file
+
+    dataOnChange: (currentState, event) ->
+      newState = {}
+      newState[currentState] = event.target.value
+      @setState newState
+
+    handleSubmit: ->
+      PostApi.createPost
+        post_type: @state.post_type, title: @state.title,
+        @state.image,
+        (err, xhr) =>
+          data = JSON.parse xhr.responseText
+
+          unless err || xhr.status != 201
+            alertify.success 'Your post was submit successful!'
+            AppActions.PostActions.toggleModal()
+          else
+            alertify.error data.error
 
     render: ->
       `<div className="tab-image">
-        <InputTitle />
-        <InputTags />
+        <div className="form-group">
+          <input type="text" className="form-control" onBlur={this.dataOnChange.bind(this, 'title')} placeholder="Title of post" />
+        </div>
+        <div className="form-group">
+          <input type="text" className="form-control" placeholder="#Tags" />
+        </div>
         <div className="form-group">
           <div className="row">
             <div className="col-md-6">
               <div className="thumbnail">
-                <img src="http://sgag.sg/assets/placeholder.png" />
+                <input type='file' className='file-input-field' onChange={this.imageOnChange} />
+                <div className="overlay"></div>
+                <img src={this.state.imageThumbnail} />
               </div>
             </div>
             <div className="col-md-6">
               <div className="post-preview">
-                <h3>{this.state.title}</h3>
+                <h3>{this.state.title ? this.state.title : 'Title of post'}</h3>
                 <div className="text-muted">
                   <small>Aug 15 / By </small>
                   <a href="#">{this.state.username}</a>
@@ -58,6 +96,6 @@ define [
           </div>
         </div>
         <div className="form-group">
-          <button className="btn blue-button full-width text-center">Submit</button>
+          <button className="btn blue-button full-width text-center" onClick={this.handleSubmit}>Submit</button>
         </div>
       </div>`

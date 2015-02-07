@@ -12,13 +12,13 @@ define [
   # initialization
   CHANGE_EVENT = "change"
 
-  _posts = [
-    {id: 1, name: "Post #1", url: "http://i.4cdn.org/wsg/1422129126611.gif"}
-    {id: 2, name: "Post #2", url: "http://i.4cdn.org/wsg/1419775504250.gif"}
-    {id: 3, name: "Post #3", url: "http://media2.giphy.com/media/87rTWttn5oEF2/200.gif"}
-  ]
+  _posts = undefined
+
+  _isModalOpen = false
 
   # handlers
+  _toggleModal = ->
+    _isModalOpen = not _isModalOpen
 
   # event register
   PostStore = _.extend(new EventEmitter(), {
@@ -26,10 +26,24 @@ define [
     addChangeListener:        (callback) -> @on CHANGE_EVENT, callback
     removeChangeListener:     (callback) -> @removeListener CHANGE_EVENT, callback
     getPosts:                 -> _posts
+    getModalState:            -> _isModalOpen
     dispatcherIndex:          AppDispatcher.register (payload)->
       action = payload.action
 
-      PostStore.emitChange()
+      if _.contains [AppConstants.POST.TOGGLE_MODAL], action.actionType
+        switch action.actionType
+          when AppConstants.POST.TOGGLE_MODAL then _toggleModal()
+
+        PostStore.emitChange()
+
+    Mixins:
+      getInitialState: -> isModalOpen: _isModalOpen, posts: _posts
+
+      componentWillMount: -> PostStore.addChangeListener(@onPostStoreChange)
+
+      componentWillUnmount: -> PostStore.removeChangeListener(@onPostStoreChange)
+
+      onPostStoreChange: -> @setState isModalOpen: _isModalOpen, posts: _posts
   })
 
   PostStore

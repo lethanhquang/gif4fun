@@ -8,7 +8,7 @@ define [
   'client/constants/app-constants'
 ], (_, Immutable, EventEmitter, AppDispatcher, AppConstants) ->
 
-  # @author Phan Quang Hung
+  # @author Quang Râu
   # Store user infos
   #
   # This store is responsible for controlling all user infos, for

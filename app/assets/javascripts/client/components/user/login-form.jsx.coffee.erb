@@ -1,0 +1,30 @@
+'use strict'
+
+define [
+  'jquery'
+  'react'
+], ($, React) ->
+
+  React.createClass
+    displayName: 'LoginForm'
+
+    componentWillMount: ->
+      @setState csrf_token: $("meta[name='csrf-token']").attr('content')
+
+    render: ->
+      `<form method='post' action='/users/sign_in'>
+        <input type='hidden' name='utf8' value='' />
+        <input type='hidden' name='authenticity_token' value={this.state.csrf_token} />
+        <div className="form-group">
+          <input type='email' name='user[email]' className='form-control' placeholder='Email' />
+        </div>
+        <div className="form-group">
+          <input type='password' name='user[password]' className='form-control' placeholder='Password' />
+        </div>
+        <div className="submit-container">
+          <span className="forgot-password">
+            <a className="ember-view" href="#">Forgot your password?</a>
+          </span>
+          <button type="submit">Sign In</button>
+        </div>
+      </form>`

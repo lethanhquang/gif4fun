@@ -75,17 +75,16 @@ class User < ActiveRecord::Base
       end
     end
 
-    def self.find_for_database_authentication(params)
-      where(params).first
-    end
-
-
     # Associate the identity with the user if needed
     if identity.user != user
       identity.user = user
       identity.save!
     end
     user
+  end
+
+  def self.find_for_database_authentication(params)
+    where(params).first
   end
 
   def self.authorize(params)

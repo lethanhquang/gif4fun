@@ -35,7 +35,7 @@ module API
         end
 
         post :sign_in do
-          user = User.authorize! my_params
+          user = User.authorize! my_permitted_params
 
           ApiResponse::Resource.new(user.as_api_response, access_token: user.authentication_token).as_json
         end

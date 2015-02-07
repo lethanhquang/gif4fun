@@ -9,9 +9,12 @@ define [
   # This script is responsible for managing actions between multiple components
   # via dispatching event handling to listened components
 
+  # Manage Post info
+  PostActions =
+    toggleModal: ->
+      AppDispatcher.handleViewAction actionType: AppConstants.POST.TOGGLE_MODAL
+
   # Manage user info
-  # UPDATE_INFO
-  # TOGGLE_PROFILE
   UserActions =
     updateInfo: (values, keys) ->
       AppDispatcher.handleViewAction actionType: AppConstants.USER.UPDATE_INFO, data: { values: values, keys: keys }
@@ -20,5 +23,5 @@ define [
       AppDispatcher.handleViewAction actionType: AppConstants.USER.TOGGLE_PROFILE
 
   # export actions
-  window.actions = { UserActions }
-  { UserActions }
+  window.actions = { PostActions, UserActions }
+  { PostActions, UserActions }

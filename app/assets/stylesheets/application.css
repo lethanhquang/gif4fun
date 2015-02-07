@@ -12,6 +12,8 @@
  *
  *= require default
  *= require client
+ *= require alertify/themes/alertify.default
+ *= require alertify/themes/alertify.core
  */
 
 @import "bootstrap-sprockets";

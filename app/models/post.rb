@@ -48,4 +48,9 @@ class Post < ActiveRecord::Base
                         content_type: { content_type: ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'] },
                         size: { less_than: 3.megabyte }
 
+  scope :filtered, lambda{ |params|
+    filtered_by_status(params)
+  }
+  scope :filtered_by_status, -> (params) { with_status params[:status] if params[:status].present? }
+
 end

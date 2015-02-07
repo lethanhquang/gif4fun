@@ -11,6 +11,8 @@ html
     = requirejs_include_tag  'application'
     = csrf_meta_tags
   body
+    - flash.each do |key, value|
+      = react_component("Alertify", type: "log", message: value)
     .animsition-loading
     = yield
 

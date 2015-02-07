@@ -10,6 +10,7 @@
     "react-bootstrap": "0.13.0",
     "react-router": "0.11.5",
     "react-rater": "0.1.0",
+    "FileAPI": "2.0.9",
     "alertify": "0.3.10",
     "flux": "2.0.2",
     "eventemitter2": "latest",

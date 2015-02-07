@@ -6,20 +6,23 @@ define [
   'react-bootstrap'
   'client/actions/app-actions'
   'client/stores/user-store'
+  'client/stores/post-store'
   'client/components/new-post/new-post-tabs'
-], (React, Router, ReactBootstrap, AppActions, UserStore, NewPostTabs) ->
+], (React, Router, ReactBootstrap, AppActions, UserStore, PostStore, NewPostTabs) ->
 
   # @author Quang Râu
   #
   # User component
 
+  mixins = {
+    getInitialState: -> test: 'Hello'
+    componentWillMount: -> console.log 'do sth'
+  }
+
   React.createClass
     displayName: 'NewPost'
 
-    mixins: [ReactBootstrap.OverlayMixin, UserStore.Mixins]
-
-    getInitialState: ->
-      isModalOpen: false
+    mixins: [ReactBootstrap.OverlayMixin, UserStore.Mixins, PostStore.Mixins]
 
     handleToggle: -> @setState isModalOpen: not @state.isModalOpen
 
@@ -45,4 +48,3 @@ define [
           </div>
         </div>
       </ReactBootstrap.Modal>`
-
