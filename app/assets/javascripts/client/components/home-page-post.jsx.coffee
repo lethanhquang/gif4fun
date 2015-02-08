@@ -11,20 +11,17 @@ define [
   React.createClass
     displayName: 'HomePagePost'
 
-    getInitialState: ->
-      post: @props.post
-
     render: ->
-      post = @state.post
+      post = @props.post
 
       `<div>
         <div className="row row-post">
           <div className="col-md-6">
-            <img src={post.url} className="img-responsive" />
+            <img src={post.image} className="img-responsive" />
           </div>
           <div className="col col-sm-6">
-            <a href="#"><h3 className="title">{post.name}</h3></a>
-            <div className="text-muted"><small>Aug 15 / By <a href="#">John Pierce</a></small></div>
+            <a href="#"><h3 className="title">{post.title}</h3></a>
+            <div className="text-muted"><small>Aug 15 / By <a href="#">{post.user.name}</a></small></div>
             <ul className="stats">
               <li><i className="fa fa-eye"></i> 1,395</li>
               <li><i className="fa fa-star"></i> 1,395</li>

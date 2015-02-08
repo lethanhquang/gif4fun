@@ -24,17 +24,14 @@ define [
       files:     {image: image}
       complete:  callback
 
-  getPosts: (methods, callback) ->
+  getPosts: (params, include, methods, callback) ->
     request
       .get '/api/v1/posts'
-      .query(
-        access_token:  UserStore.getUser().get 'authentication_token'
-        methods: methods
-      )
+      .query( access_token:  UserStore.getUser().get 'authentication_token')
+      .query $.param(params)
+      .query $.param(include: include)
       .query $.param(methods: methods)
-      .end (results) ->
-        # add checked value to results
-        _.each results.body.data, (datum) ->
+      .end callback
 
   getPostInfo: (post_id, include, methods, callback) ->
     request

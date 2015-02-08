@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   include ExtActiveRecord
   include Devise::Controllers::UrlHelpers
 
+  # association
+  has_many :posts
+
   before_save :ensure_authentication_token
 
   TEMP_EMAIL_PREFIX = 'system@gif4fun.me'

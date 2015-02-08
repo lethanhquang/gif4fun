@@ -2,9 +2,12 @@
 
 define [
   'react'
+  'client/stores/user-store'
   'client/stores/post-store'
+  'client/web-api/post-api'
+  'client/actions/app-actions'
   'client/components/home-page-post'
-], (React, PostStore, HomePagePost) ->
+], (React, UserStore, PostStore, PostApi, AppActions, HomePagePost) ->
 
   # @author Quang Rau
   #
@@ -13,8 +16,14 @@ define [
   React.createClass
     displayName: 'HomePage'
 
-    getInitialState: ->
-      posts: PostStore.getPosts()
+    mixins: [UserStore.Mixins, PostStore.Mixins]
+
+    componentWillMount: ->
+      @loadNewPosts(1)
+
+    loadNewPosts: (page) ->
+      PostApi.getPosts { sort_by: 'id', sort_dir: 'desc', page: page }, ['user'], ['image'], (result) ->
+        AppActions.PostActions.loadNewPosts result.body.data
 
     render: ->
       posts = _(@state.posts).map((post)->
@@ -24,8 +33,8 @@ define [
       )
 
       `<div className="panel">
-        <div className="panel-heading">Top Stories</div>
-        <div className="panel-body" id="top-stories">
+        <div className="panel-heading">New Stories</div>
+        <div className="panel-body" id="new-stories">
           {posts}
           <div className="well text-center">
             <h1>Centered Text</h1>

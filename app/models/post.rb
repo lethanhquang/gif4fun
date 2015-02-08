@@ -36,6 +36,7 @@ class Post < ActiveRecord::Base
       large: '-quality 90'
     }
 
+  # association
   belongs_to :user
 
   validates :title, presence: true, length: { maximum: 255 }

@@ -14,17 +14,12 @@ define [
   #
   # User component
 
-  mixins = {
-    getInitialState: -> test: 'Hello'
-    componentWillMount: -> console.log 'do sth'
-  }
-
   React.createClass
     displayName: 'NewPost'
 
     mixins: [ReactBootstrap.OverlayMixin, UserStore.Mixins, PostStore.Mixins]
 
-    handleToggle: -> @setState isModalOpen: not @state.isModalOpen
+    handleToggle: -> AppActions.PostActions.toggleModal()
 
     render: ->
       return `<li />` unless @state.user

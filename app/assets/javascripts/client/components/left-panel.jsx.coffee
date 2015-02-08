@@ -14,7 +14,7 @@ define [
     render: ->
       `<div className="col-md-4">
         <div className="panel panel-default" id="sidebar">
-          <div className="panel-heading">Sidebar</div>
+          <div className="panel-heading">Trending</div>
           <div className="panel-body">
             <ul className="nav nav-stacked">
               <li><a href="#">Link</a></li>
@@ -25,7 +25,7 @@ define [
         </div>
 
         <div className="panel">
-          <div className="panel-heading">New Stories</div>
+          <div className="panel-heading">Top Stories</div>
           <div className="panel-body">
             <div className="well">
               <img src="http://s.bootply.com/assets/example/bg_iphone.png" className="img-responsive" />

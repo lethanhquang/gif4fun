@@ -21,19 +21,19 @@ module API
         post do
           user_authenticate!
 
-          post = Post.new my_permitted_params
-          post.save!
+          post = CreatePostService.create! my_permitted_params, current_user
 
           ApiResponse::Resource.new(post.as_json_api(params)).as_json
         end
 
-        desc 'Get top posts'
+        desc 'Get posts'
 
         params do
-          requires :sort_by, type: String, values: %w(id total_like), desc: 'Sort by'
+          requires :sort_by, type: String, values: %w(id created_at), desc: 'Sort by'
+          optional :sort_dir, type: String, values: %w(asc desc), desc: 'Sort dir'
           optional :page, desc: 'Page of content'
           optional :limit, desc: 'Limit of posts per page'
-          optional :include, desc: 'Avaiable values: tags'
+          optional :include, desc: 'Avaiable values: user'
         end
 
         get do

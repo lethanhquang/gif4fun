@@ -11,6 +11,8 @@ define [
 
   # Manage Post info
   PostActions =
+    loadNewPosts: (values)->
+      AppDispatcher.handleViewAction actionType: AppConstants.POST.LOAD_NEW_POSTS, data: values
     toggleModal: ->
       AppDispatcher.handleViewAction actionType: AppConstants.POST.TOGGLE_MODAL
 
