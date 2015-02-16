@@ -219,8 +219,35 @@ button {
     }
   }
 
-  #top-stories {
+  #new-stories {
+    .homepage-post-enter {
+      opacity: 0.01;
+      transition: opacity .5s ease-in;
+
+      &.homepage-post-enter-active {
+        opacity: 1;
+      }
+    }
+
     .row-post {
+      .post-container {
+        position: relative;
+
+        .overlay {
+          display: block;
+          position: absolute;
+          top: 0; left: 0; bottom: 0; right: 0; z-index: 1;
+          background: image-url('icon-gif-play.png') no-repeat center center;
+          opacity: 0.8;
+        }
+
+        &:hover {
+          .overlay {
+            opacity: 0;
+          }
+        }
+      }
+
       .title {
         margin: 0;
         padding: 0;
@@ -251,6 +278,48 @@ button {
           margin-right: 5px;
           background-color: #DDD;
           color: #333;
+        }
+      }
+
+      .top-comment {
+        h4 {
+          font-size: 14px;
+          i { color: $colorRed; font-size: 12px; }
+        }
+
+        .comment {
+          .content {
+            margin-bottom: 5px;
+            font-size: 12px;
+          }
+          .info {
+            .media-heading {
+              line-height: 25px;
+              font-weight: 400;
+              span { font-weight: 100; font-size: 12px; }
+            }
+
+            ul.stats {
+              list-style: none;
+              line-height: 25px;
+              text-align: right;
+
+              li {
+                display: inline;
+                padding: 0;
+
+                a {
+                  font-size: 12px;
+                  &.thumb-up { color: $colorGreen; }
+                  &.thumb-down { color: $colorRed; }
+                }
+
+                &:last-child {
+                  padding-left: 10px;
+                }
+              }
+            }
+          }
         }
       }
     }

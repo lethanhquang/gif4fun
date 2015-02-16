@@ -47,3 +47,7 @@ gem 'simple_form'
 gem 'nested_form'
 
 gem 'dotenv-rails', :groups => [:development, :test]
+
+group :development, :test do
+  gem 'pry-rails'
+end

@@ -12,7 +12,7 @@ define [
   # initialization
   CHANGE_EVENT = "change"
 
-  _posts = []
+  _posts = _newPosts = sponsorPosts = []
 
   _isModalOpen = false
 

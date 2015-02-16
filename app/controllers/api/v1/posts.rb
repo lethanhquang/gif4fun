@@ -5,7 +5,7 @@ module API
       resource :posts do
         helpers do
           def my_permitted_keys
-            [:title, :content, :image]
+            [:title, :content, :image, :thumbnail]
           end
         end
 
@@ -20,6 +20,8 @@ module API
 
         post do
           user_authenticate!
+
+          params[:thumbnail] = params[:image]
 
           post = CreatePostService.create! my_permitted_params, current_user
 

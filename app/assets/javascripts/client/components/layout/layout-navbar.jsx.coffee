@@ -11,11 +11,11 @@ define [
   #
   # Navbar component
 
-  React.createClass
+  LayoutNavbar = React.createClass
     displayName: 'LayoutNavbar'
 
     render: ->
-      `<nav className="navbar navbar-static">
+      `<nav className="navbar navbar-static navbar-fixed-top">
         <div className="container">
           <div className="navbar-header">
             <a className="navbar-brand" href="/" target="ext"><b>Gif4Fun!</b></a>
@@ -32,4 +32,7 @@ define [
           </div>
         </div>
       </nav>`
+
+  # return
+  LayoutNavbar
 
